@@ -1,0 +1,155 @@
+:root {
+  --brightBlue: hsl(220, 98%, 61%);
+  --checkBackground: linear-gradienthsl(192, 100%, 67%) tohsl(280, 87%, 65%);
+
+  --lightMode-veryLightGray: hsl(0, 0%, 98%);
+  --lightMode-veryLightGrayishBlue: hsl(236, 33%, 92%);
+  --lightMode-lightGrayishBlue: hsl(233, 11%, 84%);
+  --lightMode-darkGrayishBlue: hsl(236, 9%, 61%);
+  --lightMode-veryDarkGrayishBlue: hsl(235, 19%, 35%);
+
+  --darkMode-veryDarkBlue: hsl(235, 21%, 11%);
+  --darkMode-veryDarkDesaturatedBlue: hsl(235, 24%, 19%);
+  --darkMode-lightGrayishBlue: hsl(234, 39%, 85%);
+  --darkMode-lightGrayishBlueHover: hsl(236, 33%, 92%);
+  --darkMode-darkGrayishBlue: hsl(234, 11%, 52%);
+  --darkMode-veryDarkGrayishBlue: hsl(233, 14%, 35%);
+  --darkMode-veryDarkGrayishBlue: hsl(237, 14%, 26%);
+}
+
+* {
+  font-size: 18px;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  position: relative;
+  background-color: var(--lightMode-veryLightGrayishBlue);
+}
+
+#backgroundImg {
+  width: 100%;
+}
+
+input[type="checkbox"] {
+  margin: 0 0.5em 0 2em;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+main {
+  margin: auto;
+  width: 30em;
+  position: absolute;
+  top: 3em;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+
+  & p {
+    text-align: center;
+    color: var(--lightMode-darkGrayishBlue);
+  }
+}
+
+header {
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: space-between;
+
+  h1 {
+    text-transform: uppercase;
+    margin: 0;
+    font-size: 44px;
+    letter-spacing: 12px;
+    color: var(--lightMode-veryLightGray);
+  }
+  img {
+    height: 26px;
+    cursor: pointer;
+  }
+}
+
+#newToDoItem,
+#toDoArea {
+  margin: 0.5em 0;
+  display: flex;
+  border-radius: 0.5em;
+  background-color: var(--lightMode-veryLightGray);
+}
+
+#newToDoItem {
+  padding: 1em 0;
+  align-items: center;
+  form {
+    display: flex;
+
+    input[type="checkbox"] {
+      margin: 0 0.5em 0 2em;
+      cursor: pointer;
+      background-color: var(--checkBackground);
+    }
+
+    input[type="text"] {
+       margin-left: 1em;
+       border: none;
+       outline: none;
+      background: transparent;
+       border-bottom: 1px solid var(--lightMode-darkGrayishBlue)
+    }
+  }
+}
+
+#toDoArea {
+  flex-direction: column;
+
+  aside {
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: var(--lightMode-darkGrayishBlue);
+
+    span:not(span:first-of-type) {
+      padding-left: 0.5em;
+    }
+  }
+}
+
+#toDoTable {
+  .listItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--lightMode-lightGrayishBlue);
+
+    li {
+      padding: 1em;
+      color: var(--lightMode-veryDarkGrayishBlue);
+      list-style: none;
+    }
+
+    img {
+      padding-right: 1.5em;
+      height: 16px;
+    }
+  }
+}
+
+.attribution {
+  margin: auto;
+  border-top: 1px solid var(--lightMode-darkGrayishBlue);
+  margin-top: 4em;
+  padding-top: 0.5em;
+
+  a {
+    padding-left: 0.3em;
+    color: var(--brightBlue);
+    text-decoration: none;
+  }
+}
