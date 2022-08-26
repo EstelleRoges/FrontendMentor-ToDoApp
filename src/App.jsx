@@ -3,25 +3,70 @@ import { useState } from "react";
 import ToDoItem from "./components/toDoItem/ToDoItem";
 
 function App() {
-  let [list, setList] = useState(["Clean Ti'Bec's cage"]);
+  const [list, setList] = useState([]);
+  const [newToDo, setNewToDo] = useState("");
+  const [toDelete, setToDelete] = useState([]);
 
-const handleChange = (event) => {
-  const text = event.target.value;
-  console.log(text);
-}
+  const [count, setCount] = useState(0);
 
-const addToDoItem = (newItem) => {
-  setList((prevList) => {
-    return [...prevList, newItem]
-  });
-  console.log(list);
-}
-
-  const selectToDelete = () => {
-    console.log("Preparing to delete");
+  const increase = () => {
+    setCount(count + 1);
   };
 
-  const clearCompleted = () => {};
+  const handleChange = (event) => {
+    setNewToDo(event.target.value);
+  };
+
+  const addToDoItem = (event) => {
+    if (event.keyCode === 13) {
+      setList((prevList) => {
+        return [...prevList, newToDo];
+      });
+      setNewToDo("");
+    }
+  };
+
+  const selectToDelete = (id) => {
+    increase();
+    setToDelete((prevDeleteList) => {
+        for(let i = 0; i <= toDelete.length; i++) {
+          if(prevDeleteList[i] === id) {
+            return prevDeleteList.splice(i, 1);
+      } else {
+        return [...prevDeleteList, id];
+          }
+        }
+      });
+    //   if (toDelete.includes(id)) {
+    //     return prevDeleteList.filter((item, index) => {
+    //       return index !== id;
+    //     });
+    // });
+    console.log(toDelete);
+  };
+
+  const deleteItem = (id) => {
+    setList((prevList) => {
+      return prevList.filter((item, index) => {
+        return index !== id;
+      });
+    });
+  };
+  const clearCompleted = () => {
+    // console.log(list);
+    console.log(toDelete);
+    // for(let i = 0; i < list.length; i++) {
+    //   if(list[i] === toDelete[i]) {
+    //     console.log(list[i]);
+    //   }
+    // }
+    // setList((prevList, toDelete) => {
+    //   return prevList.filter((toDeleteItem, index) => {
+    //     console.log(toDelete);
+    //     return index !== toDelete;
+    //   })
+    // })
+  };
 
   return (
     <>
@@ -38,17 +83,29 @@ const addToDoItem = (newItem) => {
         </header>
 
         <section id="newToDoItem">
-          <form>
-            <input type="checkbox" name="newToDo" id="newToDo" />
-            <input type="text" name="newToDoText" id="newToDoText" value={handleChange} onChange={handleChange} onKeyDown={addToDoItem}/>
-          </form>
+          <input type="radio" name="newToDo" id="newToDo" />
+          <input
+            type="text"
+            name="toDoText"
+            id="toDoText"
+            value={newToDo}
+            onChange={handleChange}
+            onKeyDown={addToDoItem}
+            placeholder="Create a new todo..."
+          />
         </section>
 
         <section id="toDoArea">
           <article id="toDoTable">
             {list.map((item, index) => {
               return (
-                <ToDoItem key={index} text={item} onAdd={addToDoItem} onCheck={selectToDelete} />
+                <ToDoItem
+                  key={index}
+                  id={index}
+                  text={item}
+                  onChecked={selectToDelete}
+                  onDelete={deleteItem}
+                />
               );
             })}
           </article>
